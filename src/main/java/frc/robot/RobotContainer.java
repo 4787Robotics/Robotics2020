@@ -30,11 +30,9 @@ public class RobotContainer {
   private final TankDrive m_tankDrive = new TankDrive();
 
   private final Drive m_driveCommand = new Drive(m_tankDrive);
-
   
-  private final Drive m_autoCommand = new Drive(m_tankDrive);
-
-  Pixy2 pixy = Pixy2.createInstance(link);
+  //supply link based on how we wire the Pixycam
+  //Pixy2 pixy = Pixy2.createInstance(link);
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.

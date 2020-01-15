@@ -8,35 +8,39 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.controller.PIDController;
 
 public class TankDrive extends SubsystemBase {
   /**
    * Creates a new TankDrive.
    */
-  private Talon fl, ml, bl, fr, mr, br;
+  private Talon fl, bl, fr, br;
   private SpeedControllerGroup left;
   private SpeedControllerGroup right;
   private DifferentialDrive drivetrain;
+
   public TankDrive() {
-    /*
-    fl = new Talon();
-    ml = new Talon();
-    bl = new Talon();
-    fr = new Talon();
-    mr = new Talon();
-    br = new Talon();
-    */
-    //TODO get port numbers for each motor
-    left = new SpeedControllerGroup(fl, ml, bl);
-    right = new SpeedControllerGroup(fr, mr, br);
+    fl = new Talon(Constants.motor_fl);
+    bl = new Talon(Constants.motor_bl);
+    fr = new Talon(Constants.motor_fr);
+    br = new Talon(Constants.motor_br);
+    
+    left = new SpeedControllerGroup(fl, bl);
+    right = new SpeedControllerGroup(fr, br);
     drivetrain = new DifferentialDrive(left, right);
   }
 
+  /*
+  public void drive(double x, double y, double z){
+    drivetrain.tankDrive(x, y);
+  }
+  */
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
