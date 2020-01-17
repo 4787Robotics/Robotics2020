@@ -6,6 +6,7 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot;
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
@@ -20,4 +21,23 @@ public final class Constants {
 	public static int motor_fl = 4;
 	public static int motor_br = 1;
 	public static int motor_bl = 3;
+
+	public static Joystick m_Joystick = new Joystick(0);
+
+	public Joystick getJoystick() {
+		return m_Joystick;
+	}
+	
+	public static double getRx() {
+		return Math.pow(-m_Joystick.getX(), 1);
+	}
+	
+	public static double getRy() {
+		return Math.pow(-m_Joystick.getY(), 1);
+	}
+	
+	public static double getRz() {
+		return Math.pow(m_Joystick.getZ(), 1);
+	}
+	
 }

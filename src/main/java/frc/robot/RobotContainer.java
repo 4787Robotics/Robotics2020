@@ -8,11 +8,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -27,9 +31,11 @@ public class RobotContainer {
   //private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   //Ignore that stuff
-  private final TankDrive m_tankDrive = new TankDrive();
+  private final TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
+  private final Joystick joyStick = new Joystick(0);
 
-  private final Drive m_driveCommand = new Drive(m_tankDrive);
+  private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
+  private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem);
   
   //supply link based on how we wire the Pixycam
   //Pixy2 pixy = Pixy2.createInstance(link);
@@ -40,6 +46,18 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
+    tankDriveSubsystem.setDefaultCommand(
+      new RunCommand( 
+        () -> tankDriveSubsystem.drive(
+         joyStick.getX(),
+          joyStick.getY()
+      ),
+      tankDriveSubsystem
+
+        )
+    );
+    
   }
 
   /**
@@ -49,6 +67,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+
   }
 
 

@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 //import subsystems
-import frc.robot.subsystems.TankDrive;
+import frc.robot.subsystems.TankDriveSubsystem;
 
 //import commands
-import frc.robot.commands.Drive;
+import frc.robot.commands.DriveCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to

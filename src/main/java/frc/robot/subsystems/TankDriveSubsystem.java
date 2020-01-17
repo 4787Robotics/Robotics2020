@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.controller.PIDController;
 
-public class TankDrive extends SubsystemBase {
+
+public class TankDriveSubsystem extends SubsystemBase {
   /**
    * Creates a new TankDrive.
    */
@@ -24,7 +25,7 @@ public class TankDrive extends SubsystemBase {
   private SpeedControllerGroup right;
   private DifferentialDrive drivetrain;
 
-  public TankDrive() {
+  public TankDriveSubsystem() {
     fl = new Talon(Constants.motor_fl);
     bl = new Talon(Constants.motor_bl);
     fr = new Talon(Constants.motor_fr);
@@ -33,14 +34,19 @@ public class TankDrive extends SubsystemBase {
     left = new SpeedControllerGroup(fl, bl);
     right = new SpeedControllerGroup(fr, br);
     drivetrain = new DifferentialDrive(left, right);
+    //drivetrain = new TankDrive();
   }
 
-  /*
-  public void drive(double x, double y, double z){
-    drivetrain.tankDrive(x, y);
+  public void drive(double x, double y){
+    //drivetrain.arcadeDrive(Constants.getRx(), Constants.getRy(), Constants.getRz());
+    drivetrain.tankDrive(x,y);
   }
-  */
+
+  public void stop(){
+    drivetrain.stopMotor();
+  }
   
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

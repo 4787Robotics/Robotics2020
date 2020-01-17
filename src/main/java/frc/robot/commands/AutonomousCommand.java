@@ -8,18 +8,16 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.TankDriveSubsystem;
 
-public class Drive extends CommandBase {
-  private final TankDrive m_tankDrive;
+public class AutonomousCommand extends CommandBase {
+  private TankDriveSubsystem tankDriveSubsystem;
   /**
-   * Creates a new Drive.
+   * Creates a new Autonomous.
    */
-  public Drive(TankDrive m_tankDrive) {
+  public AutonomousCommand(TankDriveSubsystem tankDriveSubsystem2) {
+    this.tankDriveSubsystem = tankDriveSubsystem;
     // Use addRequirements() here to declare subsystem dependencies.
-    this.m_tankDrive = m_tankDrive;
-    addRequirements(m_tankDrive);
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +28,6 @@ public class Drive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      RobotContainer.m_tankDrive.drive()
   }
 
   // Called once the command ends or is interrupted.
