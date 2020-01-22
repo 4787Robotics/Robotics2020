@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.controller.PIDController;
 //import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
@@ -36,6 +37,11 @@ public class RobotContainer {
 
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem);
+
+  //private final Gyro m_pidController = new PIDController(0, 0, 0, m_gyro, tankDriveSubsystem); //Kp, Ki, Kd, source, output
+  //private final GyroCommand m_pidCommand = new PIDCommand();
+
+   
   
   //supply link based on how we wire the Pixycam
   //Pixy2 pixy = Pixy2.createInstance(link);
@@ -50,8 +56,8 @@ public class RobotContainer {
     tankDriveSubsystem.setDefaultCommand(
       new RunCommand( 
         () -> tankDriveSubsystem.drive(
-         joyStick.getX(),
-          joyStick.getY()
+         joyStick.getY(),
+          joyStick.getZ()
       ),
       tankDriveSubsystem
 

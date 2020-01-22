@@ -29,11 +29,11 @@ public final class Constants {
 	}
 	
 	public static double getRx() {
-		return Math.pow(-m_Joystick.getX(), 1);
+		return Math.pow(m_Joystick.getX(), 1);
 	}
 	
 	public static double getRy() {
-		return Math.pow(-m_Joystick.getY(), 1);
+		return Math.pow(m_Joystick.getY(), 1);
 	}
 	
 	public static double getRz() {
