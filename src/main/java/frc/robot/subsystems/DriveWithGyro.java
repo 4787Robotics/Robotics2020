@@ -7,25 +7,36 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.controller.PIDController;
 
-
-public class TankDriveSubsystem extends SubsystemBase {
+public class DriveWithGyro extends PIDSubsystem {
   /**
-   * Creates a new TankDrive.
+   * Creates a new DriveWithGyro.
    */
+
+  private int Kp;
+  private int Ki;
+  private int Kd;
+
   private Talon fl, bl, fr, br;
   private SpeedControllerGroup left;
   private SpeedControllerGroup right;
   private DifferentialDrive drivetrain;
+  private ADXRS450_Gyro m_gyro;
+  private double initialAngle;
 
-  public TankDriveSubsystem() {
+  public DriveWithGyro() {
+    super(
+        // The PIDController used by the subsystem
+        new PIDController(0, 0, 0));
     fl = new Talon(Constants.motor_fl);
     bl = new Talon(Constants.motor_bl);
     fr = new Talon(Constants.motor_fr);
@@ -34,14 +45,12 @@ public class TankDriveSubsystem extends SubsystemBase {
     left = new SpeedControllerGroup(fl, bl);
     right = new SpeedControllerGroup(fr, br);
     drivetrain = new DifferentialDrive(left, right);
+    m_gyro = new ADXRS450_Gyro();
+    initialAngle = m_gyro.getAngle();
   }
 
   public void drive(double y, double z){
-    //drivetrain.arcadeDrive(Constants.getRx(), Constants.getRy(), Constants.getRz());
-    //drivetrain.tankDrive(y,-x);
-    //drivetrain.arcadeDrive(y, z);
     drivetrain.arcadeDrive(-y,(0.75 *  z), true);
-    //System.out.println("x = " + x + ", y = " + y);
   }
 
   public void stop(){
@@ -49,7 +58,19 @@ public class TankDriveSubsystem extends SubsystemBase {
   }
 
   @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  public void useOutput(double output, double setpoint) {
+    // Use the output here
+    drivetrain.arcadeDrive(-y, 0.75*z);
+    if (getMeasurement() == initialAngle){ 
+
+    } else {
+
+    }
+  }
+
+  @Override
+  public double getMeasurement() {
+    // Return the process variable measurement here
+    return m_gyro.getAngle();
   }
 }

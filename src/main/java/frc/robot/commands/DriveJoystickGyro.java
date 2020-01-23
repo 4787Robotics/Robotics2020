@@ -9,19 +9,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
-import frc.robot.RobotContainer;
+
+import frc.robot.subsystems.DriveWithGyro;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class GyroCommand extends PIDCommand {
-  //private final Gyro m_pidController;
+public class DriveJoystickGyro extends PIDCommand {
   /**
-   * Creates a new PIDCommand.
+   * Creates a new DriveJoystickGyro.
    */
-  public GyroCommand(Gyro pidController) {
-    //super(
-      /*
+
+  DriveWithGyro m_driveGyro = new DriveWithGyro();
+
+  public DriveJoystickGyro() {
+    super(
         // The controller that the command will use
         new PIDController(0, 0, 0),
         // This should return the measurement
@@ -32,11 +34,10 @@ public class GyroCommand extends PIDCommand {
         output -> {
           // Use the output here
         });
-        */
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
-    //m_pidController = pidController; 
-    //addRequirements(m_pidController);
+    addRequirements(m_driveGyro);
+    getController();
   }
 
   // Returns true when the command should end.
