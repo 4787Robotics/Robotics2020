@@ -37,6 +37,8 @@ public class DriveWithGyro extends PIDSubsystem {
     super(
         // The PIDController used by the subsystem
         new PIDController(0, 0, 0));
+        setSetpoint(m_gyro.getAngle());
+
     fl = new Talon(Constants.motor_fl);
     bl = new Talon(Constants.motor_bl);
     fr = new Talon(Constants.motor_fr);
@@ -60,7 +62,7 @@ public class DriveWithGyro extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-    drivetrain.arcadeDrive(-y, 0.75*z);
+    //drivetrain.arcadeDrive(-joyStick.getY(), joyStick.getZ()*0.75);
     if (getMeasurement() == initialAngle){ 
 
     } else {
