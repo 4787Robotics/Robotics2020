@@ -20,12 +20,12 @@ public class DriveJoystickGyro extends PIDCommand {
    * Creates a new DriveJoystickGyro.
    */
 
-  DriveWithGyro m_driveGyro = new DriveWithGyro();
+  private final DriveWithGyro m_driveGyro = new DriveWithGyro();
 
   public DriveJoystickGyro() {
     super(
         // The controller that the command will use
-        new PIDController(0, 0, 0),
+        new PIDController(1, 0, 0),
         // This should return the measurement
         () -> 0,
         // This should return the setpoint (can also be a constant)
@@ -33,11 +33,11 @@ public class DriveJoystickGyro extends PIDCommand {
         // This uses the output
         output -> {
           // Use the output here
+          
         });
     // Use addRequirements() here to declare subsystem dependencies.
     // Configure additional PID options by calling `getController` here.
-    addRequirements(m_driveGyro);
-    getController();
+    addRequirements();
   }
 
   // Returns true when the command should end.

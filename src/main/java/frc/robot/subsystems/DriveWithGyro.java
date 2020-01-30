@@ -14,42 +14,43 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class DriveWithGyro extends PIDSubsystem {
   /**
    * Creates a new DriveWithGyro.
    */
 
-  private int Kp;
-  private int Ki;
-  private int Kd;
-
-  private Talon fl, bl, fr, br;
+  private PWMVictorSPX fl, bl, fr, br;
   private SpeedControllerGroup left;
   private SpeedControllerGroup right;
   private DifferentialDrive drivetrain;
-  private ADXRS450_Gyro m_gyro;
-  private double initialAngle;
 
-  public DriveWithGyro() {
+  private ADXRS450_Gyro m_gyro;
+
+  public DriveWithGyro(double kp, double ki, double kd) {
     super(
         // The PIDController used by the subsystem
-        new PIDController(0, 0, 0));
-        setSetpoint(m_gyro.getAngle());
+        new PIDController(kp, ki, kd));
+    setSetpoint(m_gyro.getAngle());
 
-    fl = new Talon(Constants.motor_fl);
-    bl = new Talon(Constants.motor_bl);
-    fr = new Talon(Constants.motor_fr);
-    br = new Talon(Constants.motor_br);
+    fl = new PWMVictorSPX(Constants.motor_fl);
+    bl = new PWMVictorSPX(Constants.motor_bl);
+    fr = new PWMVictorSPX(Constants.motor_fr);
+    br = new PWMVictorSPX(Constants.motor_br);
     
     left = new SpeedControllerGroup(fl, bl);
     right = new SpeedControllerGroup(fr, br);
     drivetrain = new DifferentialDrive(left, right);
     m_gyro = new ADXRS450_Gyro();
-    initialAngle = m_gyro.getAngle();
+    
+    // Temporarily add widget to dashboard to play with PID setting
+    SmartDashboard.putData("Angle PID", this);
   }
+
 
   public void drive(double y, double z){
     drivetrain.arcadeDrive(-y,(0.75 *  z), true);
@@ -62,17 +63,13 @@ public class DriveWithGyro extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-    //drivetrain.arcadeDrive(-joyStick.getY(), joyStick.getZ()*0.75);
-    if (getMeasurement() == initialAngle){ 
-
-    } else {
-
-    }
+    this.drive(0, setpoint);
   }
 
   @Override
   public double getMeasurement() {
     // Return the process variable measurement here
+    System.out.println("Getting angle value: " + m_gyro.getAngle());
     return m_gyro.getAngle();
   }
 }
