@@ -42,9 +42,10 @@ public class RobotContainer {
 
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem);
+  private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
 
-  //private final Gyro m_pidController = new PIDController(0, 0, 0, m_gyro, tankDriveSubsystem); //Kp, Ki, Kd, source, output
-  //private final GyroCommand m_pidCommand = new PIDCommand();
+  //private final DriveWithGyro m_pidController = new DriveWithGyro(0, 0, 0, m_gyro, tankDriveSubsystem); //Kp, Ki, Kd, source, output
+  //private final DriveJoystickGyro m_pidCommand = new DriveJoystickGyro();
 
    
   
@@ -69,6 +70,11 @@ public class RobotContainer {
         )
     );
   
+    m_intake.setDefaultCommand(
+      new RunCommand(
+        () -> m_intake.intake()
+      )
+    );
     
 
   }
