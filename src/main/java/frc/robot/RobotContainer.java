@@ -72,7 +72,7 @@ public class RobotContainer {
   
     m_intake.setDefaultCommand(
       new RunCommand(
-        () -> m_intake.intake()
+        () -> m_intake.intake(), m_intake
       )
     );
     
