@@ -36,6 +36,7 @@ public class RobotContainer {
 
   //Ignore that stuff
   private final TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
+  private final Intake m_intake = new Intake();
   private final Joystick joyStick = new Joystick(0);
   //private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
 

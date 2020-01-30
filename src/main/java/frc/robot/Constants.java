@@ -24,6 +24,10 @@ public final class Constants {
 	public static int motor_br = 1;
 	public static int motor_bl = 3;
 
+	public static int fly1 = 5;
+	public static int fly2 = 6;
+	public static int PEsensor = 7;
+
 	public static Joystick m_Joystick = new Joystick(0);
 
 	public Joystick getJoystick() {
