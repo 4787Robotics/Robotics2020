@@ -38,7 +38,9 @@ public class RobotContainer {
   private final TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
   private final Intake m_intake = new Intake();
   private final Joystick joyStick = new Joystick(0);
+  private final DriveWithGyro m_driveWithGyro = new DriveWithGyro(0, 0, 0, tankDriveSubsystem);
   //private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
+  //private final USBCamera camera = new USBCamera();
 
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem);
@@ -58,7 +60,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
-
+    System.out.println("RobotContainer");
     tankDriveSubsystem.setDefaultCommand(
       new RunCommand( 
         () -> tankDriveSubsystem.drive(

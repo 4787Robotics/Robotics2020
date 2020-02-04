@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveWithGyro;
 import frc.robot.subsystems.TankDriveSubsystem;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
@@ -22,8 +23,10 @@ public class AutonomousCommand extends CommandBase {
   /**
    * Creates a new Autonomous.
    */
-  public AutonomousCommand(TankDriveSubsystem tankDriveSubsystem2) {
-    this.tankDriveSubsystem = tankDriveSubsystem;
+  public AutonomousCommand(TankDriveSubsystem tankdrive) {
+    System.out.println("AutoCommand");
+    new DriveWithGyro(0,0,0,tankdrive);
+    
     // Use addRequirements() here to declare subsystem dependencies.
     //addRequirements(tankDriveSubsystem);
   }
