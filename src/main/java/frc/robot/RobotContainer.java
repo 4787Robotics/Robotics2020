@@ -20,6 +20,7 @@ import io.github.pseudoresonance.pixy2api.Pixy2;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -71,6 +72,17 @@ public class RobotContainer {
 
         )
     );
+
+    
+    // m_driveWithGyro.setDefaultCommand(
+    //   new RunCommand( 
+    //     () -> tankDriveSubsystem.drive(
+    //      0.5,0),
+    //   m_driveWithGyro
+
+    //     )
+    // );
+    
   
     m_intake.setDefaultCommand(
       new RunCommand(
@@ -99,6 +111,15 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    // m_driveWithGyro.setDefaultCommand(
+    //   new RunCommand( 
+    //     () -> tankDriveSubsystem.drive(
+    //      -.5,0),
+    //   m_driveWithGyro
+
+    //     )
+    // );
+    SmartDashboard.putNumber("Angle PID", m_driveWithGyro.getMeasurement());
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }

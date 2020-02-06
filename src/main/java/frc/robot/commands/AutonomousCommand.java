@@ -12,20 +12,23 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveWithGyro;
 import frc.robot.subsystems.TankDriveSubsystem;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 
 public class AutonomousCommand extends CommandBase {
   private TankDriveSubsystem tankDriveSubsystem;
-  /*
-  private ADXRS450_Gyro m_gyro;
-  double initialAngle;
-  double kP = 1;
-  */
+  private DriveWithGyro m_driveGyro;
+  private double x = 1;
+
+  // double initialAngle;
+  // double kP = 1;
+  // */
   /**
    * Creates a new Autonomous.
    */
   public AutonomousCommand(TankDriveSubsystem tankdrive) {
     System.out.println("AutoCommand");
-    new DriveWithGyro(0,0,0,tankdrive);
+    m_driveGyro = new DriveWithGyro(0,0,0,tankdrive);
     
     // Use addRequirements() here to declare subsystem dependencies.
     //addRequirements(tankDriveSubsystem);
@@ -34,7 +37,7 @@ public class AutonomousCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-      //initialAngle = m_gyro.getAngle();
+
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,7 +48,13 @@ public class AutonomousCommand extends CommandBase {
     tankDriveSubsystem.drive(.5 + kP * error, .5 - kP * error);
     tankDriveSubsystem.drive(0.5 , 0.5);
     */
+    
+    System.out.println("Driving autonomously");
+    // Temporarily add widget to dashboard to play with PID setting
+    System.out.println("Running YOUR auto");
+    SmartDashboard.putNumber("Angle PID", m_driveGyro.getMeasurement());
   }
+  
 
   // Called once the command ends or is interrupted.
   @Override

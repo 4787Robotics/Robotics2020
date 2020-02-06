@@ -48,14 +48,17 @@ public class DriveWithGyro extends PIDSubsystem {
     // right = new SpeedControllerGroup(fr, br);
     // drivetrain = new DifferentialDrive(left, right);
     System.out.println("Gyrooooo");
-    m_gyro = new ADXRS450_Gyro(Port.kOnboardCS2);
-
-    setSetpoint(m_gyro.getAngle());
+    m_gyro = new ADXRS450_Gyro();
+    System.out.println("GyroTest baby, I mean I do what I do. TESTING AYEEEEEEEE ");
     
-    // Temporarily add widget to dashboard to play with PID setting
-    SmartDashboard.putNumber("Angle PID", m_gyro.getAngle());
+    setSetpoint(m_gyro.getAngle());
+    m_gyro.getAngle();
+
   }
 
+  public double getGyroAngle(){
+    return m_gyro.getAngle();
+  }
 
   public void drive(double y, double z){
     //drivetrain.arcadeDrive(-y,(0.75 *  z), true);
