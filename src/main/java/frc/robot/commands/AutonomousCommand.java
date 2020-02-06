@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class AutonomousCommand extends CommandBase {
-  private TankDriveSubsystem tankDriveSubsystem;
   private DriveWithGyro m_driveGyro;
   private double x = 1;
 
@@ -27,11 +26,11 @@ public class AutonomousCommand extends CommandBase {
    * Creates a new Autonomous.
    */
   public AutonomousCommand(TankDriveSubsystem tankdrive) {
-    System.out.println("AutoCommand");
+   // System.out.println("AutoCommand");
     m_driveGyro = new DriveWithGyro(0,0,0,tankdrive);
     
     // Use addRequirements() here to declare subsystem dependencies.
-    //addRequirements(tankDriveSubsystem);
+    addRequirements(tankdrive);
   }
 
   // Called when the command is initially scheduled.
@@ -48,10 +47,10 @@ public class AutonomousCommand extends CommandBase {
     tankDriveSubsystem.drive(.5 + kP * error, .5 - kP * error);
     tankDriveSubsystem.drive(0.5 , 0.5);
     */
-    
-    System.out.println("Driving autonomously");
+    m_driveGyro.drive(.5, 0);
+    //System.out.println("Driving autonomously");
     // Temporarily add widget to dashboard to play with PID setting
-    System.out.println("Running YOUR auto");
+   // System.out.println("Running YOUR auto");
     SmartDashboard.putNumber("Angle PID", m_driveGyro.getMeasurement());
   }
   

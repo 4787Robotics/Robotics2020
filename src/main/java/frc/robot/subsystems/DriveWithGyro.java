@@ -73,7 +73,7 @@ public class DriveWithGyro extends PIDSubsystem {
   @Override
   public void useOutput(double output, double setpoint) {
     // Use the output here
-    this.drive(0, setpoint);
+    //this.drive(0, setpoint);
   }
 
   @Override

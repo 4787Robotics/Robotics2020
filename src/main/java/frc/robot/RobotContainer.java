@@ -19,6 +19,9 @@ import frc.robot.subsystems.*;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+
+import java.util.Set;
+
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -46,6 +49,7 @@ public class RobotContainer {
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
+  private boolean AutoOn = false;
 
   //private final DriveWithGyro m_pidController = new DriveWithGyro(0, 0, 0, m_gyro, tankDriveSubsystem); //Kp, Ki, Kd, source, output
   //private final DriveJoystickGyro m_pidCommand = new DriveJoystickGyro();
@@ -64,14 +68,13 @@ public class RobotContainer {
     System.out.println("RobotContainer");
     tankDriveSubsystem.setDefaultCommand(
       new RunCommand( 
-        () -> tankDriveSubsystem.drive(
-         joyStick.getY(),
-          joyStick.getZ()
-      ),
-      tankDriveSubsystem
-
-        )
+        () -> {
+           tankDriveSubsystem.drive(joyStick.getY(), joyStick.getZ());
+        },
+        tankDriveSubsystem
+      )
     );
+      
 
     
     // m_driveWithGyro.setDefaultCommand(
@@ -110,16 +113,9 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // m_driveWithGyro.setDefaultCommand(
-    //   new RunCommand( 
-    //     () -> tankDriveSubsystem.drive(
-    //      -.5,0),
-    //   m_driveWithGyro
 
-    //     )
-    // );
-    SmartDashboard.putNumber("Angle PID", m_driveWithGyro.getMeasurement());
+   
+  public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return m_autoCommand;
   }
