@@ -8,57 +8,32 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.DriveWithGyro;
-import frc.robot.subsystems.TankDriveSubsystem;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.subsystems.IndexSystem;
 
-
-public class AutonomousCommand extends CommandBase {
-  private DriveWithGyro m_driveGyro;
-  private double x = 1;
-
-  // double initialAngle;
-  // double kP = 1;
-  // */
+public class IndexCommand extends CommandBase {
   /**
-   * Creates a new Autonomous.
+   * Creates a new IndexCommand.
    */
-  public AutonomousCommand(TankDriveSubsystem tankdrive) {
-   // System.out.println("AutoCommand");
-    m_driveGyro = new DriveWithGyro(0,0,0,tankdrive);
-    
+  private final IndexSystem m_index;
+
+  public IndexCommand(IndexSystem index) {
+    m_index = index;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(tankdrive);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    /*
-    double error = initialAngle - m_gyro.getAngle();
-    tankDriveSubsystem.drive(.5 + kP * error, .5 - kP * error);
-    tankDriveSubsystem.drive(0.5 , 0.5);
-    */
-    m_driveGyro.drive(.5, .5);
-    //System.out.println("Driving autonomously");
-    // Temporarily add widget to dashboard to play with PID setting
-   // System.out.println("Running YOUR auto");
-    SmartDashboard.putNumber("Angle PID", m_driveGyro.getMeasurement());
   }
-  
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    
   }
 
   // Returns true when the command should end.

@@ -43,13 +43,16 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
   private final Joystick joyStick = new Joystick(0);
   private final DriveWithGyro m_driveWithGyro = new DriveWithGyro(0, 0, 0, tankDriveSubsystem);
+  private final IndexSystem m_index = new IndexSystem();
   //private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
   //private final USBCamera camera = new USBCamera();
 
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
+  private final IndexCommand m_indexCommand = new IndexCommand(m_index);
   private boolean AutoOn = false;
+
 
   //private final DriveWithGyro m_pidController = new DriveWithGyro(0, 0, 0, m_gyro, tankDriveSubsystem); //Kp, Ki, Kd, source, output
   //private final DriveJoystickGyro m_pidCommand = new DriveJoystickGyro();

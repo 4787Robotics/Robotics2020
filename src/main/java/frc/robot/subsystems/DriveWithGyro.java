@@ -15,11 +15,14 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 public class DriveWithGyro extends PIDSubsystem {
   /**
@@ -31,7 +34,7 @@ public class DriveWithGyro extends PIDSubsystem {
   private SpeedControllerGroup right;
   private DifferentialDrive drivetrain;
 
-  private ADXRS450_Gyro m_gyro;
+  private Gyro m_gyro;
   private TankDriveSubsystem tankdrive;
 
   public DriveWithGyro(double kp, double ki, double kd,TankDriveSubsystem tankdrive) {
@@ -48,15 +51,17 @@ public class DriveWithGyro extends PIDSubsystem {
     // right = new SpeedControllerGroup(fr, br);
     // drivetrain = new DifferentialDrive(left, right);
     System.out.println("Gyrooooo");
-    m_gyro = new ADXRS450_Gyro();
+    m_gyro = new ADXRS450_Gyro(SPI.Port.kMXP);
     System.out.println("GyroTest baby, I mean I do what I do. TESTING AYEEEEEEEE ");
-    
+    zeroHeading();
+    m_gyro.calibrate();
     setSetpoint(m_gyro.getAngle());
     m_gyro.getAngle();
 
   }
 
   public double getGyroAngle(){
+    System.out.println(m_gyro.getAngle());
     return m_gyro.getAngle();
   }
 
@@ -64,7 +69,9 @@ public class DriveWithGyro extends PIDSubsystem {
     //drivetrain.arcadeDrive(-y,(0.75 *  z), true);
     tankdrive.drive(-y,(0.75 *  z));
   }
-
+  public void zeroHeading() {
+    m_gyro.reset();
+  }
   public void stop(){
     //drivetrain.stopMotor();
     tankdrive.stop();

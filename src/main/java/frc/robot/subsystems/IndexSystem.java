@@ -7,37 +7,28 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
+import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DigitalInput;
 
-public class Intake extends SubsystemBase {
+public class IndexSystem extends SubsystemBase {
   /**
-   * Creates a new Intake.
+   * Creates a new IndexSystem.
    */
 
-   private PWMVictorSPX fly1;
-   private PWMVictorSPX fly2;
+  private PWMVictorSPX conveyerLeft;
+  private PWMVictorSPX conveyerRight;
+  private DigitalInput PEsensor;
 
-  public Intake() {
-    fly1 = new PWMVictorSPX(Constants.fly1);
-    fly2 = new PWMVictorSPX(Constants.fly2);
+  public IndexSystem() {
+    conveyerLeft = new PWMVictorSPX(Constants.conveyerLeft);
+    conveyerRight = new PWMVictorSPX(Constants.conveyerRight);
+    PEsensor = new DigitalInput(Constants.PEsensor);
   }
 
-  public void stopFlywheels(){
-    fly1.stopMotor();
-    fly2.stopMotor();
-  }
-
-  public void intake(){
-    /*
-    if (getSensor()) {
-      fly1.set(1.0);
-      fly2.set(-1.0);
-    } else {
-      stopFlywheels();
-    }
-    */
+  public boolean getSensor(){
+    return PEsensor.get();
   }
 
   @Override
