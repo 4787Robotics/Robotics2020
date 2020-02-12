@@ -48,5 +48,9 @@ public final class Constants {
 	public static double getRz() {
 		return Math.pow(m_Joystick.getZ(), 1);
 	}
+
+	public static boolean getButtonTwo() {
+		return m_Joystick.getRawButtonPressed(2);
+	}
 	
 }

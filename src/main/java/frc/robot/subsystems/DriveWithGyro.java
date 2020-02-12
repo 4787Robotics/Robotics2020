@@ -61,7 +61,7 @@ public class DriveWithGyro extends PIDSubsystem {
   }
 
   public double getGyroAngle(){
-    System.out.println(m_gyro.getAngle());
+    //System.out.println(m_gyro.getAngle());
     return m_gyro.getAngle();
   }
 
@@ -86,7 +86,7 @@ public class DriveWithGyro extends PIDSubsystem {
   @Override
   public double getMeasurement() {
     // Return the process variable measurement here
-    System.out.println("Getting angle value: " + m_gyro.getAngle());
+    //System.out.println("Getting angle value: " + m_gyro.getAngle());
     SmartDashboard.putNumber("Angle PID", m_gyro.getAngle());
     return m_gyro.getAngle();
   }

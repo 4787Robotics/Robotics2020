@@ -18,7 +18,10 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.XboxController.Button;
 
 import java.util.Set;
 
@@ -44,6 +47,8 @@ public class RobotContainer {
   private final Joystick joyStick = new Joystick(0);
   private final DriveWithGyro m_driveWithGyro = new DriveWithGyro(0, 0, 0, tankDriveSubsystem);
   private final IndexSystem m_index = new IndexSystem();
+  private final PneumaticsArm parm = new PneumaticsArm();
+
   //private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
   //private final USBCamera camera = new USBCamera();
 
@@ -51,6 +56,7 @@ public class RobotContainer {
   private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
   private final IndexCommand m_indexCommand = new IndexCommand(m_index);
+  private double x;
   private boolean AutoOn = false;
 
 
@@ -77,25 +83,14 @@ public class RobotContainer {
         tankDriveSubsystem
       )
     );
-      
-
-    
-    // m_driveWithGyro.setDefaultCommand(
-    //   new RunCommand( 
-    //     () -> tankDriveSubsystem.drive(
-    //      0.5,0),
-    //   m_driveWithGyro
-
-    //     )
-    // );
-    
   
+    /*
     m_intake.setDefaultCommand(
       new RunCommand(
-        () -> m_intake.intake(), m_intake
+        () -> m_intake.intake(joyStick.getRawButtonPressed(2)), m_intake
       )
     );
-    
+    */
 
   }
 
@@ -106,10 +101,16 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-
-
+    new JoystickButton(joyStick, 2).whileHeld(m_intakeCommand);
+    new JoystickButton(joyStick, 7).whenPressed( 
+      new InstantCommand(
+        () -> {
+         parm.toggle();
+         System.out.println("Pneumatics " + x++);
+      }
+      , parm
+    ));
   }
-
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
