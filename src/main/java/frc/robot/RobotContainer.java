@@ -53,7 +53,8 @@ public class RobotContainer {
   //private final USBCamera camera = new USBCamera();
 
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
-  private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem);
+  private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem,2,false);
+  private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
   private final IndexCommand m_indexCommand = new IndexCommand(m_index);
   private double x;
@@ -121,6 +122,7 @@ public class RobotContainer {
    
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    //return m_autoCommand;
+    return AGCommand;
   }
 }

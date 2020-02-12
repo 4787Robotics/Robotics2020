@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class AutonomousCommand extends WaitCommand {
   private DriveWithGyro m_driveGyro;
   private double x = 1;
+  private boolean turn = false;
 
   // double initialAngle;
   // double kP = 1;
@@ -27,10 +28,11 @@ public class AutonomousCommand extends WaitCommand {
    * Creates a new Autonomous.
    */
 
-  public AutonomousCommand(TankDriveSubsystem tankdrive) {
-    super(2.0);
+  public AutonomousCommand(TankDriveSubsystem tankdrive, double seconds, boolean turn) {
+    super(seconds);
    // System.out.println("AutoCommand");
     m_driveGyro = new DriveWithGyro(0,0,0,tankdrive);
+    this.turn = turn;
     
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(tankdrive);
@@ -51,7 +53,15 @@ public class AutonomousCommand extends WaitCommand {
     tankDriveSubsystem.drive(.5 + kP * error, .5 - kP * error);
     tankDriveSubsystem.drive(0.5 , 0.5);
     */
+    if(turn == false)
+    {
     m_driveGyro.drive(.5, 0);
+    }
+    else if(turn == true)
+    {
+      m_driveGyro.drive(0,1.5);
+    }
+    
     
     
     //System.out.println("Driving autonomously");
