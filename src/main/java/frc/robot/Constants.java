@@ -31,6 +31,8 @@ public final class Constants {
 	public static int conveyerLeft = 8;
 	public static int conveyerRight = 9;
 
+	public static int shooterWheel = 0;
+
 	public static Joystick m_Joystick = new Joystick(0);
 
 	public Joystick getJoystick() {

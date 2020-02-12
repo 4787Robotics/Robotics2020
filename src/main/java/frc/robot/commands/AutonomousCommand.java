@@ -20,6 +20,7 @@ public class AutonomousCommand extends WaitCommand {
   private DriveWithGyro m_driveGyro;
   private double x = 1;
   private boolean turn = false;
+  private boolean statement = false;
 
   // double initialAngle;
   // double kP = 1;
@@ -38,6 +39,16 @@ public class AutonomousCommand extends WaitCommand {
     addRequirements(tankdrive);
   }
 
+  public AutonomousCommand(TankDriveSubsystem tankdrive, double seconds, boolean turn, boolean statement) {
+    super(seconds);
+   // System.out.println("AutoCommand");
+    m_driveGyro = new DriveWithGyro(0,0,0,tankdrive);
+    this.turn = turn;
+    this.statement = statement;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(tankdrive);
+  }
+  
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
@@ -55,11 +66,17 @@ public class AutonomousCommand extends WaitCommand {
     */
     if(turn == false)
     {
-    m_driveGyro.drive(.5, 0);
+    m_driveGyro.drive(.65, 0);
     }
     else if(turn == true)
     {
-      m_driveGyro.drive(0,1.5);
+      m_driveGyro.drive(0,1);
+    }
+    if(statement == true) {
+      System.out.println("Leyna is dope");
+    }
+    else if(statement == false) {
+      System.out.println("Yahir is dope");
     }
     
     

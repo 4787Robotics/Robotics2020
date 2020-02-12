@@ -19,6 +19,7 @@ public class IndexCommand extends CommandBase {
   public IndexCommand(IndexSystem index) {
     m_index = index;
     // Use addRequirements() here to declare subsystem dependencies.
+    
   }
 
   // Called when the command is initially scheduled.
@@ -29,6 +30,7 @@ public class IndexCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_index.index();
   }
 
   // Called once the command ends or is interrupted.

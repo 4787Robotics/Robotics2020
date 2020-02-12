@@ -46,8 +46,9 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
   private final Joystick joyStick = new Joystick(0);
   private final DriveWithGyro m_driveWithGyro = new DriveWithGyro(0, 0, 0, tankDriveSubsystem);
-  private final IndexSystem m_index = new IndexSystem();
+  private final IndexSystem index = new IndexSystem();
   private final PneumaticsArm parm = new PneumaticsArm();
+  private final ShooterSubsystem shooterWheel = new ShooterSubsystem();
 
   //private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
   //private final USBCamera camera = new USBCamera();
@@ -56,15 +57,9 @@ public class RobotContainer {
   private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem,2,false);
   private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
-  private final IndexCommand m_indexCommand = new IndexCommand(m_index);
+  private final IndexCommand m_indexCommand = new IndexCommand(index);
   private double x;
   private boolean AutoOn = false;
-
-
-  //private final DriveWithGyro m_pidController = new DriveWithGyro(0, 0, 0, m_gyro, tankDriveSubsystem); //Kp, Ki, Kd, source, output
-  //private final DriveJoystickGyro m_pidCommand = new DriveJoystickGyro();
-
-   
   
   //supply link based on how we wire the Pixycam
   //Pixy2 pixy = Pixy2.createInstance(link);
@@ -84,15 +79,16 @@ public class RobotContainer {
         tankDriveSubsystem
       )
     );
-  
-    /*
-    m_intake.setDefaultCommand(
+
+    index.setDefaultCommand(
       new RunCommand(
-        () -> m_intake.intake(joyStick.getRawButtonPressed(2)), m_intake
+        () -> {
+          index.index();
+        },
+        index
       )
     );
-    */
-
+    
   }
 
   /**
@@ -110,6 +106,14 @@ public class RobotContainer {
          System.out.println("Pneumatics " + x++);
       }
       , parm
+    ));
+    new JoystickButton(joyStick, 1).whenPressed( 
+      new InstantCommand(
+        () -> {
+         shooterWheel.shoot();
+         System.out.println("Shooting");
+      }
+      , shooterWheel
     ));
   }
 

@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsystems.TankDriveSubsystem;
+import frc.robot.commands.AutonomousCommand;
 
 public class AutonomousGroupCommand extends SequentialCommandGroup {
   
@@ -18,8 +19,13 @@ public class AutonomousGroupCommand extends SequentialCommandGroup {
    */
   public AutonomousGroupCommand(TankDriveSubsystem tankdrive) {
     addCommands(
-      new AutonomousCommand(tankdrive, 2.0, false),
-      new AutonomousCommand(tankdrive, 1.0, true)
+      new AutonomousCommand(tankdrive, 1, false),
+      new AutonomousCommand(tankdrive, 0.9, true),
+      new AutonomousCommand(tankdrive, .8, false),
+      new AutonomousCommand(tankdrive, 1.6, true),
+      new AutonomousCommand(tankdrive, .6, false),
+      new AutonomousCommand(tankdrive, 2, true, true),
+      new AutonomousCommand(tankdrive, 1.2, false, false)
 
     );
   }
