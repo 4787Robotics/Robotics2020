@@ -7,8 +7,11 @@
 
 package frc.robot.subsystems;
 
-import frc.robot.Constants; 
+import frc.robot.Constants;
+import io.github.pseudoresonance.pixy2api.Pixy2;
+import io.github.pseudoresonance.pixy2api.links.SPILink;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ShooterSubsystem extends SubsystemBase {
@@ -17,9 +20,13 @@ public class ShooterSubsystem extends SubsystemBase {
    */
 
   private PWMTalonSRX shooter;
+  //private Pixy2 pixy;
 
   public ShooterSubsystem() {
     shooter = new PWMTalonSRX(Constants.shooterWheel);
+    //supply link based on how we wire the Pixycam
+    
+    
   }
 
   public void shoot(){

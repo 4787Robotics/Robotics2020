@@ -16,7 +16,7 @@ public class PneumaticsArm extends SubsystemBase {
    * Creates a new PneumaticsArm.
    */
   DoubleSolenoid doubleSolenoid;
-  boolean isUp;
+  public boolean isUp;
 
   public PneumaticsArm() {
     doubleSolenoid = new DoubleSolenoid(1,2);
@@ -33,7 +33,7 @@ public class PneumaticsArm extends SubsystemBase {
   public void up() {
     doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
     doubleSolenoid.set(DoubleSolenoid.Value.kOff);
-    System.out.println("Hola amigos I am on");
+    System.out.println("Hola amigos I am up");
     isUp = true;
   }
 

@@ -22,6 +22,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import io.github.pseudoresonance.pixy2api.links.Link;
 
 import java.util.Set;
 
@@ -49,20 +50,21 @@ public class RobotContainer {
   private final IndexSystem index = new IndexSystem();
   private final PneumaticsArm parm = new PneumaticsArm();
   private final ShooterSubsystem shooterWheel = new ShooterSubsystem();
+  private final PixyCam pixy = new PixyCam();
 
   //private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
   //private final USBCamera camera = new USBCamera();
 
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem,2,false);
-  private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem);
+  private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem, pixy, m_intake, parm);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
   private final IndexCommand m_indexCommand = new IndexCommand(index);
   private double x;
   private boolean AutoOn = false;
+  private Link link;
   
-  //supply link based on how we wire the Pixycam
-  //Pixy2 pixy = Pixy2.createInstance(link);
+
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -88,6 +90,7 @@ public class RobotContainer {
         index
       )
     );
+
     
   }
 
@@ -114,6 +117,13 @@ public class RobotContainer {
          System.out.println("Shooting");
       }
       , shooterWheel
+    ));
+    new JoystickButton(joyStick, 11).whenPressed(
+      new InstantCommand(
+        () -> {
+          tankDriveSubsystem.drive(2,3);
+        }
+      , tankDriveSubsystem
     ));
   }
 
