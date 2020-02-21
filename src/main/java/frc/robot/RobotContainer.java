@@ -82,14 +82,14 @@ public class RobotContainer {
       )
     );
 
-    index.setDefaultCommand(
-      new RunCommand(
-        () -> {
-          index.index();
-        },
-        index
-      )
-    );
+    // index.setDefaultCommand(
+    //   new RunCommand(
+    //     () -> {
+    //       index.index();
+    //     },
+    //     index
+    //   )
+    // );
 
     
   }

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
+import java.awt.*;
 import edu.wpi.first.wpilibj.PWMTalonSRX;
 
 public class IndexSystem extends SubsystemBase {
@@ -25,7 +26,7 @@ public class IndexSystem extends SubsystemBase {
 
   public IndexSystem() {
     conveyerLeft = new TalonSRX(Constants.conveyerLeft);
-    conveyerRight = new TalonSRX(Constants.conveyerRight);
+    // conveyerRight = new TalonSRX(Constants.conveyerRight);
     PEsensor = new DigitalInput(Constants.PEsensor);
   }
 
@@ -36,7 +37,6 @@ public class IndexSystem extends SubsystemBase {
   public void index() {
     if(getSensor() == true) {
       moveBelt();
-    
     }
   }
   

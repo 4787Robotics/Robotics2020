@@ -23,6 +23,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveWithGyro extends PIDSubsystem {
   /**
@@ -33,6 +34,8 @@ public class DriveWithGyro extends PIDSubsystem {
   private SpeedControllerGroup left;
   private SpeedControllerGroup right;
   private DifferentialDrive drivetrain;
+
+  //private fl, bl, fr, br;
 
   private Gyro m_gyro;
   private TankDriveSubsystem tankdrive;

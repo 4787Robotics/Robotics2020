@@ -14,22 +14,32 @@ import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.controller.PIDController;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 
 public class TankDriveSubsystem extends SubsystemBase {
   /**
    * Creates a new TankDrive.
    */
-  private Talon fl, bl, fr, br;
+  //private Talon fl, bl, fr, br;
   private SpeedControllerGroup left;
   private SpeedControllerGroup right;
   private DifferentialDrive drivetrain;
 
+  private VictorSPX fl, bl, fr, br;
+
   public TankDriveSubsystem() {
+    /*
     fl = new Talon(Constants.motor_fl);
     bl = new Talon(Constants.motor_bl);
     fr = new Talon(Constants.motor_fr);
     br = new Talon(Constants.motor_br);
+    */
+    fl = new VictorSPX(Constants.motor_fl);
+    bl = new VictorSPX(Constants.motor_bl);
+    fr = new VictorSPX(Constants.motor_fr);
+    br = new VictorSPX(Constants.motor_br);
     
     left = new SpeedControllerGroup(fl, bl);
     right = new SpeedControllerGroup(fr, br);

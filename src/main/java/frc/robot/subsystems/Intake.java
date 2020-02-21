@@ -11,8 +11,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
+import io.github.pseudoresonance.pixy2api.Pixy2;
+import io.github.pseudoresonance.pixy2api.links.Link;
 import edu.wpi.first.wpilibj.InterruptableSensorBase;
 import edu.wpi.first.wpilibj.Joystick;
+import frc.robot.subsystems.PixyCam;
 
 
 public class Intake extends SubsystemBase {
@@ -29,6 +32,7 @@ public class Intake extends SubsystemBase {
     
     fly1 = new PWMVictorSPX(Constants.fly1);
     fly2 = new PWMVictorSPX(Constants.fly2);
+    
     //PESensor = new DigitalInput(Constants.PEsensor);
   }
 
@@ -42,6 +46,10 @@ public class Intake extends SubsystemBase {
     fly1.set(1.0);
     fly2.set(1.0);
     System.out.println("Molly is cool " + x++);
+  }
+
+  public void intakePixy(){
+    
   }
 
   @Override
