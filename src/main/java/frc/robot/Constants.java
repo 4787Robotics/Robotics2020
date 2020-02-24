@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.I2C.Port;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static int motor_fr = 2;
-	public static int motor_fl = 4;
-	public static int motor_br = 1;
-	public static int motor_bl = 3;
+    public static int motor_fr = 3;
+	public static int motor_fl = 2;
+	public static int motor_br = 4;
+	public static int motor_bl = 1;
 
 	public static int fly1 = 5;
 	public static int fly2 = 6;

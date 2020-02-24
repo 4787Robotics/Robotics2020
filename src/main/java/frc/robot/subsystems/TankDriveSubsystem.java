@@ -16,6 +16,9 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.PWMVictorSPX;
 
 
 public class TankDriveSubsystem extends SubsystemBase {
@@ -27,20 +30,13 @@ public class TankDriveSubsystem extends SubsystemBase {
   private SpeedControllerGroup right;
   private DifferentialDrive drivetrain;
 
-  private VictorSPX fl, bl, fr, br;
+  private WPI_VictorSPX fl, bl, fr, br;
 
   public TankDriveSubsystem() {
-    /*
-    fl = new Talon(Constants.motor_fl);
-    bl = new Talon(Constants.motor_bl);
-    fr = new Talon(Constants.motor_fr);
-    br = new Talon(Constants.motor_br);
-    */
-    fl = new VictorSPX(Constants.motor_fl);
-    bl = new VictorSPX(Constants.motor_bl);
-    fr = new VictorSPX(Constants.motor_fr);
-    br = new VictorSPX(Constants.motor_br);
-    
+    fl = new WPI_VictorSPX(Constants.motor_fl);
+    bl = new WPI_VictorSPX(Constants.motor_bl);
+    fr = new WPI_VictorSPX(Constants.motor_fr);
+    br = new WPI_VictorSPX(Constants.motor_br);
     left = new SpeedControllerGroup(fl, bl);
     right = new SpeedControllerGroup(fr, br);
     drivetrain = new DifferentialDrive(left, right);
