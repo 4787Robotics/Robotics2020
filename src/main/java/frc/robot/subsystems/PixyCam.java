@@ -11,7 +11,6 @@ import io.github.pseudoresonance.pixy2api.Pixy2CCC;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 import io.github.pseudoresonance.pixy2api.links.SPILink;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.subsystems.TankDriveSubsystem;
 
 import java.util.ArrayList;
 
@@ -53,9 +52,13 @@ public class PixyCam extends SubsystemBase {
           }
         }
     }
+    if(targetBlock != null)
+    {
     SmartDashboard.putNumber("Ball x", targetBlock.getX());
     SmartDashboard.putNumber("Ball y", targetBlock.getY());
+    }
     return targetBlock;
+    
   }
 
   @Override

@@ -46,7 +46,7 @@ public class RobotContainer {
   private final TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
   private final Intake m_intake = new Intake();
   private final Joystick joyStick = new Joystick(0);
-  private final DriveWithGyro m_driveWithGyro = new DriveWithGyro(0, 0, 0, tankDriveSubsystem);
+  // private final DriveWithGyro m_driveWithGyro = new DriveWithGyro(0, 0, 0, tankDriveSubsystem);
   private final IndexSystem index = new IndexSystem();
   private final PneumaticsArm parm = new PneumaticsArm();
   private final ShooterSubsystem shooterWheel = new ShooterSubsystem();
@@ -56,7 +56,7 @@ public class RobotContainer {
   //private final USBCamera camera = new USBCamera();
 
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
-  private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem,2,false);
+  // private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem,2,false);
   private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem, pixy, m_intake, parm);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
   private final IndexCommand m_indexCommand = new IndexCommand(index);
