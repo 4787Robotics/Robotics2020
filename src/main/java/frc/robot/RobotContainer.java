@@ -60,6 +60,7 @@ public class RobotContainer {
   private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem, pixy, m_intake, parm);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
   private final IndexCommand m_indexCommand = new IndexCommand(index);
+  private final IntakeIndexCommand intakeIndex = new IntakeIndexCommand(m_intake, index);
   private double x;
   private boolean AutoOn = false;
   private Link link;
@@ -101,7 +102,9 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    new JoystickButton(joyStick, 2).whileHeld(m_intakeCommand);
+    //joystick button one is now used to turn on intake flywheel and index pulley system
+    new JoystickButton(joyStick, 1).whileHeld(intakeIndex);
+    //new JoystickButton(joyStick, 2).whileHeld(m_intakeCommand);
     new JoystickButton(joyStick, 7).whenPressed( 
       new InstantCommand(
         () -> {
@@ -110,7 +113,7 @@ public class RobotContainer {
       }
       , parm
     ));
-    new JoystickButton(joyStick, 1).whenPressed( 
+    new JoystickButton(joyStick, 10).whenPressed( 
       new InstantCommand(
         () -> {
          shooterWheel.shoot();

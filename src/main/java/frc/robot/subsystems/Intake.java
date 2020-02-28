@@ -9,7 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import io.github.pseudoresonance.pixy2api.Pixy2;
 import io.github.pseudoresonance.pixy2api.links.Link;
@@ -23,28 +23,28 @@ public class Intake extends SubsystemBase {
    * Creates a new Intake.
    */
 
-   private PWMVictorSPX fly1;
-   private PWMVictorSPX fly2;
+   private WPI_VictorSPX fly;
+   //private PWMVictorSPX fly2;
    private double x;
    //private DigitalInput PESensor;
 
   public Intake() {
     
-    fly1 = new PWMVictorSPX(Constants.fly1);
-    fly2 = new PWMVictorSPX(Constants.fly2);
+    fly = new WPI_VictorSPX(Constants.fly1);
+    //fly2 = new PWMVictorSPX(Constants.fly2);
     
     //PESensor = new DigitalInput(Constants.PEsensor);
   }
 
   public void stopFlywheels(){
-    fly1.stopMotor();
-    fly2.stopMotor();
+    fly.stopMotor();
+    //fly2.stopMotor();
   }
 
   public void intake(){
 
-    fly1.set(1.0);
-    fly2.set(1.0);
+    fly.set(1.0);
+    //fly2.set(1.0);
     System.out.println("Molly is cool " + x++);
   }
 
