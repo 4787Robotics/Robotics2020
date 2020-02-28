@@ -19,12 +19,12 @@ public class IndexSystem extends SubsystemBase {
    * Creates a new IndexSystem.
    */
 
-  private TalonSRX conveyerLeft;
-  private TalonSRX conveyerRight;
+  private TalonSRX belt;
+  //private TalonSRX conveyerRight;
   private DigitalInput PEsensor;
 
   public IndexSystem() {
-    conveyerLeft = new TalonSRX(Constants.conveyerLeft);
+    belt = new TalonSRX(Constants.conveyerLeft);
     // conveyerRight = new TalonSRX(Constants.conveyerRight);
     PEsensor = new DigitalInput(Constants.PEsensor);
   }
@@ -35,15 +35,9 @@ public class IndexSystem extends SubsystemBase {
   
   public void index() {
     if(getSensor() == true) {
-      moveBelt();
+      belt.set(ControlMode.PercentOutput, 0.5);
+      System.out.println("moooooooooooooooovvveee");
     }
-  }
-  
-  public void moveBelt() {
-    conveyerLeft.set(ControlMode.PercentOutput, 0.5);
-    System.out.println("moooooooooooooooovvveee leeeeeeeeeeeeeeffffffffffftttttttt");
-    conveyerRight.set(ControlMode.PercentOutput, 0.5);
-    System.out.println("mooooooooooooooooovvvvvveeeeeeee riiiiiiiiiiiggggggghhhhhhttttt");
   }
 
   @Override
