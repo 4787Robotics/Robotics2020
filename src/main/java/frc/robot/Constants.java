@@ -25,7 +25,7 @@ public final class Constants {
 	public static int motor_bl = 1;
 
 	public static int fly1 = 5;
-	public static int fly2 = 6;
+	//public static int fly2 = 6;
 
 	public static int PEsensor = 7;
 	public static int conveyerLeft = 8;

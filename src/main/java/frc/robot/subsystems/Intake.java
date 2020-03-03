@@ -44,7 +44,6 @@ public class Intake extends SubsystemBase {
   public void intake(){
 
     fly.set(1.0);
-    //fly2.set(1.0);
     System.out.println("Molly is cool " + x++);
   }
 

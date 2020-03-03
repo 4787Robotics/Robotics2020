@@ -18,6 +18,7 @@ import frc.robot.subsystems.PneumaticsArm;
 import frc.robot.subsystems.TankDriveSubsystem;
 import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.subsystems.IndexSystem;
 
 public class AutonomousGroupCommand extends SequentialCommandGroup {
   double xTester = 0;
@@ -30,32 +31,32 @@ public class AutonomousGroupCommand extends SequentialCommandGroup {
   /**
    * Creates a new AutonomousGroupCommand.
    */
-  public AutonomousGroupCommand(TankDriveSubsystem tankdrive, PixyCam pixy, Intake intake, PneumaticsArm pneumaticsArm) {
+  public AutonomousGroupCommand(TankDriveSubsystem tankdrive, PixyCam pixy, Intake intake, PneumaticsArm pneumaticsArm, IndexSystem index) {
     addCommands(
-      new FunctionalCommand(() -> {
-        // initialize() - This gets run when the command initializes.
-        commandIsDone = false;
-      }, () -> {
-        // execute() -  This code gets executed a bunch of times as needed. It's essentially a loop that FRC
-        // runs, and allows FRC to interrupt it! A while loop was a bad idea (all Will's fault :-D)
-        System.out.println("yooo" + this.isFinished() + xTester++);
-        tankdrive.drive(0, 0.5);
-        Block largestBlock = pixy.findBiggestBlock();
-        if (largestBlock != null && (140 <= largestBlock.getX() && largestBlock.getX() < 170)) {
-          // This is our trigger that our auto command finished
-          commandIsDone = true;
-       }
-      }, (Boolean interrupted) -> {
-        // end() - FRC has told us our command is done. Techincally I don't even have to think we need
-        // to set commandIsDone to anything here, because FRC has already terminated this command.
-        commandIsDone = true;
-      }, () -> { 
-        // isFinished() - Return whether or not the command is running. This is how we can tell the command
-        // to stop executing early.
-        return commandIsDone; 
-      }, tankdrive)
-      //.withTimeout(5)
-      ,
+      // new FunctionalCommand(() -> {
+      //   // initialize() - This gets run when the command initializes.
+      //   commandIsDone = false;
+      // }, () -> {
+      //   // execute() -  This code gets executed a bunch of times as needed. It's essentially a loop that FRC
+      //   // runs, and allows FRC to interrupt it! A while loop was a bad idea (all Will's fault :-D)
+      //   System.out.println("yooo" + this.isFinished() + xTester++);
+      //   tankdrive.drive(0, 0.5);
+      //   Block largestBlock = pixy.findBiggestBlock();
+      //   if (largestBlock != null && (140 <= largestBlock.getX() && largestBlock.getX() < 170)) {
+      //     // This is our trigger that our auto command finished
+      //     commandIsDone = true;
+      //  }
+      // }, (Boolean interrupted) -> {
+      //   // end() - FRC has told us our command is done. Techincally I don't even have to think we need
+      //   // to set commandIsDone to anything here, because FRC has already terminated this command.
+      //   commandIsDone = true;
+      // }, () -> { 
+      //   // isFinished() - Return whether or not the command is running. This is how we can tell the command
+      //   // to stop executing early.
+      //   return commandIsDone; 
+      // }, tankdrive)
+      // //.withTimeout(5)
+      // ,
 
       //turn to the right until ball x coordinate is within target range
     //    new InstantCommand(() -> {
@@ -89,13 +90,31 @@ public class AutonomousGroupCommand extends SequentialCommandGroup {
     //  }, intake),
       //new WaitUntilCommand(140 < pixy.findBiggestBlock().getX() <= 170),
       // new WaitUntilCommand(pixy.findBiggestBlock().getX() == 100),
-      new AutonomousCommand(tankdrive, 1, false),
-      new AutonomousCommand(tankdrive, 0.9, true),
-      new AutonomousCommand(tankdrive, .8, false),
-      new AutonomousCommand(tankdrive, 1.6, true),
-      new AutonomousCommand(tankdrive, .6, false),
-      new AutonomousCommand(tankdrive, 2, true, true),
-      new AutonomousCommand(tankdrive, 1.2, false, false)
+
+      //new AutonomousCommand(tankdrive, index, intake, seconds, turn?, flush?)
+      //There is also a new autonomous parameter that wont need to take in flush since it would be a lot to type out.
+      //Make it easier for us. and I will implement a negative drive back for when we are at the wall. It goes like
+      //new AutonomousCommand(tankdrive, seconds, turn, back)
+
+      //IF WE ARE ON THE FAR RIGHTTTTTT ThEN THIS IS THE CODE WE SHOULD USE TO GO TO THE SHOOTER
+      //This theoretical code, I didn't measure the distances since the robot is being worked on.
+      new AutonomousCommand(tankdrive, index, intake, 1.0, false, false),
+      new AutonomousCommand(tankdrive, index, intake, .5, true, false),
+      new AutonomousCommand(tankdrive, index, intake, 2.5, false, false),
+      new AutonomousCommand(tankdrive, index, intake, .5, true, false),
+      new AutonomousCommand(tankdrive, index, intake, 1.25, false, false),
+
+      //SHOOT 3 TIMES  BABY! I tried using a for loop and it didn't work so I just wrote it out 3 times. -Yahir
+      new AutonomousCommand(tankdrive, index, intake, .1, false, true),
+      new AutonomousCommand(tankdrive, index, intake, .1, false, true),
+      new AutonomousCommand(tankdrive, index, intake, .1, false, true),
+
+      //PART II: After shooting, let's try to collect balls to shoot with or allign ourselves in a position where we can collect balls yknow.
+      new AutonomousCommand(tankdrive, .5, false, true),
+      new AutonomousCommand(tankdrive, 1, true, false),
+      new AutonomousCommand(tankdrive, 2, false, false),
+      new AutonomousCommand(tankdrive, .5, true, false),
+      new AutonomousCommand(tankdrive, 1.25, false, true)
 
     );
   }

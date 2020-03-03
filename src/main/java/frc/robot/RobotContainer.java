@@ -57,7 +57,7 @@ public class RobotContainer {
 
   private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   // private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem,2,false);
-  private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem, pixy, m_intake, parm);
+  private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem, pixy, m_intake, parm, index);
   private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
   private final IndexCommand m_indexCommand = new IndexCommand(index);
   private final IntakeIndexCommand intakeIndex = new IntakeIndexCommand(m_intake, index);
