@@ -24,11 +24,12 @@ public class IndexSystem extends SubsystemBase {
   public IndexSystem() {
     belt = new WPI_TalonSRX(Constants.conveyerLeft);
     // conveyerRight = new TalonSRX(Constants.conveyerRight);
-    PEsensor = new DigitalInput(Constants.PEsensor);
+    //PEsensor = new DigitalInput(Constants.PEsensor);
   }
 
   public boolean getSensor(){
-    return PEsensor.get();
+    //return PEsensor.get();
+    return false;
   }
   
   public void indexwPE() {

@@ -15,7 +15,7 @@ import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 // import io.github.pseudoresonance.pixy2api.Pixy2;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+//import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -41,7 +41,7 @@ public class RobotContainer {
   // private final DriveWithGyro m_driveWithGyro = new DriveWithGyro(0, 0, 0, tankDriveSubsystem);
   private final IndexSystem index = new IndexSystem();
   private final PneumaticsArm parm = new PneumaticsArm();
-  private final ShooterSubsystem shooterWheel = new ShooterSubsystem();
+  //private final ShooterSubsystem shooterWheel = new ShooterSubsystem();
   private final PixyCam pixy = new PixyCam();
 
   //private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
@@ -53,7 +53,7 @@ public class RobotContainer {
   // private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
   // private final IndexCommand m_indexCommand = new IndexCommand(index);
   private final IntakeIndexCommand intakeIndex = new IntakeIndexCommand(m_intake, index);
-  private double x;
+  //private double x;
   // private boolean AutoOn = false;
   // private Link link;
   
@@ -97,30 +97,30 @@ public class RobotContainer {
     //joystick button one is now used to turn on intake flywheel and index pulley system
     new JoystickButton(joyStick, 1).whileHeld(intakeIndex);
     //new JoystickButton(joyStick, 2).whileHeld(m_intakeCommand);
-    new JoystickButton(joyStick, 7).whenPressed( 
-      new InstantCommand(
-        () -> {
-         parm.toggle();
-         System.out.println("Pneumatics " + x++);
-      }
-      , parm
-    ));
-    new JoystickButton(joyStick, 10).whenPressed( 
-      new InstantCommand(
-        () -> {
-         shooterWheel.shoot();
-         System.out.println("Shooting");
-      }
-      , shooterWheel
-    ));
-    new JoystickButton(joyStick, 11).whenPressed(
-      new InstantCommand(
-        () -> {
-          tankDriveSubsystem.drive(2,3);
-        }
-      , tankDriveSubsystem
-    ));
-  }
+  //   new JoystickButton(joyStick, 7).whenPressed( 
+  //     new InstantCommand(
+  //       () -> {
+  //        parm.toggle();
+  //        System.out.println("Pneumatics " + x++);
+  //     }
+  //     , parm
+  //   ));
+  //   new JoystickButton(joyStick, 10).whenPressed( 
+  //     new InstantCommand(
+  //       () -> {
+  //        shooterWheel.shoot();
+  //        System.out.println("Shooting");
+  //     }
+  //     , shooterWheel
+  //   ));
+  //   new JoystickButton(joyStick, 11).whenPressed(
+  //     new InstantCommand(
+  //       () -> {
+  //         tankDriveSubsystem.drive(2,3);
+  //       }
+  //     , tankDriveSubsystem
+  //   ));
+    }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
