@@ -37,8 +37,14 @@ public class IndexSystem extends SubsystemBase {
     if(getSensor() == true) {
       belt.set(ControlMode.PercentOutput, 0.5);
       System.out.println("moooooooooooooooovvveee");
+
     }
   }
+  //indexing without the PE Sensor because I don't know if we will have it done for UIC but maybe Peoria - Yahir
+  public void ixnosensor() {
+    belt.set(ControlMode.PercentOutput, .5);
+  }
+  
 
   @Override
   public void periodic() {
