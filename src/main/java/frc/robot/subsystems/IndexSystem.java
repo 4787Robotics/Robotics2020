@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import frc.robot.Constants;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 import java.awt.*;
@@ -19,12 +20,12 @@ public class IndexSystem extends SubsystemBase {
    * Creates a new IndexSystem.
    */
 
-  private TalonSRX belt;
+  private WPI_TalonSRX belt;
   //private TalonSRX conveyerRight;
   private DigitalInput PEsensor;
 
   public IndexSystem() {
-    belt = new TalonSRX(Constants.conveyerLeft);
+    belt = new WPI_TalonSRX(Constants.conveyerLeft);
     // conveyerRight = new TalonSRX(Constants.conveyerRight);
     PEsensor = new DigitalInput(Constants.PEsensor);
   }
@@ -33,16 +34,18 @@ public class IndexSystem extends SubsystemBase {
     return PEsensor.get();
   }
   
-  public void index() {
+  public void indexwPE() {
     if(getSensor() == true) {
-      belt.set(ControlMode.PercentOutput, 0.5);
+      // belt.set(ControlMode.PercentOutput, 0.5);
+      belt.set(0.5);
       System.out.println("moooooooooooooooovvveee");
 
     }
   }
   //indexing without the PE Sensor because I don't know if we will have it done for UIC but maybe Peoria - Yahir
-  public void ixnosensor() {
-    belt.set(ControlMode.PercentOutput, .5);
+  public void index() {
+    // belt.set(ControlMode.PercentOutput, .5);
+    belt.set(.5);
   }
   
 
