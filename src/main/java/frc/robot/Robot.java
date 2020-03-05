@@ -22,13 +22,8 @@ import edu.wpi.cscore.UsbCamera;
 
 
 //import subsystems
-import frc.robot.subsystems.*;
-import io.github.pseudoresonance.pixy2api.Pixy2;
-import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 //import commands
-import frc.robot.commands.DriveCommand;
-import edu.wpi.first.wpilibj2.command.PIDCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to

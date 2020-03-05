@@ -9,25 +9,17 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 //import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import io.github.pseudoresonance.pixy2api.Pixy2;
+// import io.github.pseudoresonance.pixy2api.Pixy2;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.XboxController.Button;
-import io.github.pseudoresonance.pixy2api.links.Link;
-
-import java.util.Set;
-
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+// import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+// import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 /**
@@ -55,15 +47,15 @@ public class RobotContainer {
   //private final ADXRS450_Gyro m_gyro = new ADXRS450_Gyro();
   //private final USBCamera camera = new USBCamera();
 
-  private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
+  // private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   // private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem,2,false);
   private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem, pixy, m_intake, parm, index);
-  private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
-  private final IndexCommand m_indexCommand = new IndexCommand(index);
+  // private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
+  // private final IndexCommand m_indexCommand = new IndexCommand(index);
   private final IntakeIndexCommand intakeIndex = new IntakeIndexCommand(m_intake, index);
   private double x;
-  private boolean AutoOn = false;
-  private Link link;
+  // private boolean AutoOn = false;
+  // private Link link;
   
 
 

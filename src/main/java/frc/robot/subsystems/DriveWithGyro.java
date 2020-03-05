@@ -9,31 +9,16 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWM;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 public class DriveWithGyro extends PIDSubsystem {
   /**
    * Creates a new DriveWithGyro.
    */
 
-  private Talon fl, bl, fr, br;
-  private SpeedControllerGroup left;
-  private SpeedControllerGroup right;
-  private DifferentialDrive drivetrain;
 
   //private fl, bl, fr, br;
 

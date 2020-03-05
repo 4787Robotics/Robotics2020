@@ -9,16 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.DigitalInput;
-import io.github.pseudoresonance.pixy2api.Pixy2;
-import io.github.pseudoresonance.pixy2api.links.Link;
-import edu.wpi.first.wpilibj.InterruptableSensorBase;
-import edu.wpi.first.wpilibj.Joystick;
-import frc.robot.subsystems.PixyCam;
 
 
 public class Intake extends SubsystemBase {

@@ -7,16 +7,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.FunctionalCommand;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.PixyCam;
 import frc.robot.subsystems.PneumaticsArm;
 import frc.robot.subsystems.TankDriveSubsystem;
-import io.github.pseudoresonance.pixy2api.Pixy2CCC.Block;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.subsystems.IndexSystem;
 

@@ -7,16 +7,10 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveWithGyro;
-import frc.robot.subsystems.ShooterSubsystem;
 import frc.robot.subsystems.TankDriveSubsystem;
-import io.github.pseudoresonance.pixy2api.Pixy2;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import io.github.pseudoresonance.pixy2api.links.SPILink;
 import frc.robot.subsystems.IndexSystem;
 import frc.robot.subsystems.Intake;
 import frc.robot.commands.IntakeIndexCommand;
@@ -24,12 +18,10 @@ import frc.robot.commands.IntakeIndexCommand;
 
 public class AutonomousCommand extends WaitCommand {
   private DriveWithGyro m_driveGyro;
-  private Intake intake;
-  private IndexSystem index;
-  private double x = 1;
   private boolean turn = false;
   private boolean flush = false;
   private boolean back = false;
+  private IntakeIndexCommand iicommand;
 
   // double initialAngle;
   // double kP = 1;
@@ -46,6 +38,7 @@ public class AutonomousCommand extends WaitCommand {
     index = new IndexSystem();
     intake = new Intake();
     this.flush = flush;
+    iicommand = new IntakeIndexCommand(intake, index);
 
     
     // Use addRequirements() here to declare subsystem dependencies.
@@ -82,8 +75,7 @@ public class AutonomousCommand extends WaitCommand {
     
     if(flush == true) {
       turn = false;
-      intake.intake();
-      index.index();
+      iicommand.execute();
     }
     if(turn == false && flush == false)
     {
