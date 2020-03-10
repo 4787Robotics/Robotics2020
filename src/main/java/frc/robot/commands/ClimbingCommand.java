@@ -8,21 +8,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.IndexSystem;
 
-public class IntakeIndexCommand extends CommandBase {
+public class ClimbingCommand extends CommandBase {
   /**
-   * Creates a new IntakeIndexCommand.
+   * Creates a new ClimbingCommand.
    */
-  private final Intake m_intake;
-  private final IndexSystem m_index;
-
-  public IntakeIndexCommand(Intake intake, IndexSystem index) {
-    m_intake = intake;
-    m_index = index;
+  public ClimbingCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(intake, index);
   }
 
   // Called when the command is initially scheduled.
@@ -33,15 +25,11 @@ public class IntakeIndexCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.intake();
-    m_index.index();
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_intake.stopFlywheels();
-    m_index.stopIndex();
   }
 
   // Returns true when the command should end.

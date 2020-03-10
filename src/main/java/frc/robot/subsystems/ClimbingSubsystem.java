@@ -9,45 +9,36 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-
-public class Intake extends SubsystemBase {
+public class ClimbingSubsystem extends SubsystemBase {
   /**
-   * Creates a new Intake.
+   * Creates a new ClimbingSubsystem.
    */
+  private WPI_TalonSRX climber;
 
-   private WPI_TalonSRX fly;
-   //private PWMVictorSPX fly2;
-   private double x;
-   //private DigitalInput PESensor;
-
-  public Intake() {
-    
-    fly = new WPI_TalonSRX(Constants.fly1);
-    //fly2 = new PWMVictorSPX(Constants.fly2);
-    
-    //PESensor = new DigitalInput(Constants.PEsensor);
+  public ClimbingSubsystem() {
+    climber = new WPI_TalonSRX(Constants.climber);
   }
 
-  public void stopFlywheels(){
-    fly.set(0);
-    //fly2.stopMotor();
+  public void climbUp() {
+    climber.set(.5);
+    System.out.println("Climbing down");
   }
 
-  public void intake(){
-
-    fly.set(0.7);
-    System.out.println("Molly is cool " + x++);
+  public void climbDown() {
+    climber.set(-.5);
+    System.out.println("Climbing down");
   }
 
-  public void intakePixy() {
-    
+  public void stopClimbing() {
+    climber.set(0);
   }
-
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-
   }
 }

@@ -18,6 +18,7 @@ import frc.robot.subsystems.IndexSystem;
 public class AutonomousGroupCommand extends SequentialCommandGroup {
   double xTester = 0;
   double yTester = 0;
+  int position;
 
   // This is a bit of a hack, but I'm not sure of a better way to signal that one of our
   // auto commands is done or not.
@@ -94,15 +95,17 @@ public class AutonomousGroupCommand extends SequentialCommandGroup {
       //IF WE ARE ON THE FAR RIGHTTTTTT ThEN THIS IS THE CODE WE SHOULD USE TO GO TO THE SHOOTER
       //This theoretical code, I didn't measure the distances since the robot is being worked on.
       new AutonomousCommand(tankdrive, index, intake, 1.0, false, false),
-      new AutonomousCommand(tankdrive, index, intake, .5, true, false),
-      new AutonomousCommand(tankdrive, index, intake, 2.5, false, false),
-      new AutonomousCommand(tankdrive, index, intake, .5, true, false),
-      new AutonomousCommand(tankdrive, index, intake, 1.25, false, false),
+      new AutonomousCommand(tankdrive, 1.0, false, true),
+      new AutonomousCommand(tankdrive, index, intake, 5, true, false),
+      new AutonomousCommand(tankdrive, index, intake, 1, false, false)
+      // new AutonomousCommand(tankdrive, index, intake, .5, true, false),
+      // new AutonomousCommand(tankdrive, index, intake, 1.25, false, false)
 
+      /*
       //SHOOT 3 TIMES  BABY! I tried using a for loop and it didn't work so I just wrote it out 3 times. -Yahir
-      new AutonomousCommand(tankdrive, index, intake, .1, false, true),
-      new AutonomousCommand(tankdrive, index, intake, .1, false, true),
-      new AutonomousCommand(tankdrive, index, intake, .1, false, true),
+      new AutonomousCommand(tankdrive, index, intake, 1, false, true),
+      new AutonomousCommand(tankdrive, index, intake, 1, false, true),
+      new AutonomousCommand(tankdrive, index, intake, 1, false, true),
 
       //PART II: After shooting, let's try to collect balls to shoot with or allign ourselves in a position where we can collect balls yknow.
       new AutonomousCommand(tankdrive, .5, false, true),
@@ -110,7 +113,7 @@ public class AutonomousGroupCommand extends SequentialCommandGroup {
       new AutonomousCommand(tankdrive, 2, false, false),
       new AutonomousCommand(tankdrive, .5, true, false),
       new AutonomousCommand(tankdrive, 1.25, false, true)
-
+      */
     );
     
   }

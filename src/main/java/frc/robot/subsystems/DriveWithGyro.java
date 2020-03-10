@@ -55,7 +55,7 @@ public class DriveWithGyro extends PIDSubsystem {
 
   public void drive(double y, double z){
     //drivetrain.arcadeDrive(-y,(0.75 *  z), true);
-    tankdrive.drive(-y,(0.75 *  z));
+    tankdrive.drive(-y,(0.75 *  z), true);
   }
   
   public void zeroHeading() {

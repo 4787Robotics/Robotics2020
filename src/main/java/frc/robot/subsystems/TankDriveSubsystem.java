@@ -35,13 +35,11 @@ public class TankDriveSubsystem extends SubsystemBase {
     drivetrain = new DifferentialDrive(left, right);
   }
 
-  public void drive(double y, double z){
+  public void drive(double y, double z, boolean goSlow){
     //drivetrain.arcadeDrive(Constants.getRx(), Constants.getRy(), Constants.getRz());
     //drivetrain.tankDrive(y,-x);
     //drivetrain.arcadeDrive(y, z);
-    drivetrain.arcadeDrive(-y,(0.75 *  z), true);
-  
-
+    drivetrain.arcadeDrive(-y,(0.75 *  z), goSlow);
     //System.out.println("x = " + x + ", y = " + y);
   }
 

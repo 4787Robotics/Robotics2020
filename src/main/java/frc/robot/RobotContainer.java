@@ -8,14 +8,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
+//import edu.wpi.first.wpilibj.XboxController.Button;
 // import io.github.pseudoresonance.pixy2api.Pixy2;
 import edu.wpi.first.wpilibj2.command.Command;
-//import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 // import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -37,10 +38,12 @@ public class RobotContainer {
   //Ignore that stuff
   private final TankDriveSubsystem tankDriveSubsystem = new TankDriveSubsystem();
   private final Intake m_intake = new Intake();
-  private final Joystick joyStick = new Joystick(0);
+  //private final Joystick joyStick = new Joystick(0);
+  private final XboxController xboxController = new XboxController(0);
   // private final DriveWithGyro m_driveWithGyro = new DriveWithGyro(0, 0, 0, tankDriveSubsystem);
   private final IndexSystem index = new IndexSystem();
-  private final PneumaticsArm parm = new PneumaticsArm();
+  private final ClimbingSubsystem cSubsystem = new ClimbingSubsystem();
+  //private final PneumaticsArm parm = new PneumaticsArm();
   //private final ShooterSubsystem shooterWheel = new ShooterSubsystem();
   private final PixyCam pixy = new PixyCam();
 
@@ -49,14 +52,17 @@ public class RobotContainer {
 
   // private final DriveCommand m_driveCommand = new DriveCommand(tankDriveSubsystem);
   // private final AutonomousCommand m_autoCommand = new AutonomousCommand(tankDriveSubsystem,2,false);
-  private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem, pixy, m_intake, parm, index);
+  private final AutonomousGroupCommand AGCommand = new AutonomousGroupCommand(tankDriveSubsystem, pixy, m_intake, null, index);
   // private final IntakeCommand m_intakeCommand = new IntakeCommand(m_intake);
   // private final IndexCommand m_indexCommand = new IndexCommand(index);
   private final IntakeIndexCommand intakeIndex = new IntakeIndexCommand(m_intake, index);
+
+  //private final ClimbingCommand cCommand = new ClimbingCommand();
+  
   //private double x;
   // private boolean AutoOn = false;
   // private Link link;
-  
+  private boolean goSlow = true;
 
 
   /**
@@ -69,7 +75,8 @@ public class RobotContainer {
     tankDriveSubsystem.setDefaultCommand(
       new RunCommand( 
         () -> {
-           tankDriveSubsystem.drive(joyStick.getY(), joyStick.getZ());
+           tankDriveSubsystem.drive(xboxController.getY(GenericHID.Hand.kLeft), xboxController.getX(GenericHID.Hand.kRight), goSlow);
+           
         },
         tankDriveSubsystem
       )
@@ -95,7 +102,29 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //joystick button one is now used to turn on intake flywheel and index pulley system
-    new JoystickButton(joyStick, 1).whileHeld(intakeIndex);
+    //new JoystickButton(joyStick, 12).whileHeld(intakeIndex);
+    new JoystickButton(xboxController, XboxController.Button.kX.value).whileHeld(intakeIndex);
+    new JoystickButton(xboxController, XboxController.Button.kStickLeft.value).whenPressed(
+      new InstantCommand(
+        () -> {
+         goSlow = !goSlow;
+      }
+      , tankDriveSubsystem
+    ));
+    new JoystickButton(xboxController, XboxController.Button.kA.value).whileHeld(
+      new InstantCommand(
+        () -> {
+          cSubsystem.climbUp();
+        }
+        , cSubsystem
+      ));
+    new JoystickButton(xboxController, XboxController.Button.kB.value).whileHeld(
+      new InstantCommand(
+        () -> {
+          cSubsystem.climbDown();
+        }
+        , cSubsystem
+    ));
     //new JoystickButton(joyStick, 2).whileHeld(m_intakeCommand);
   //   new JoystickButton(joyStick, 7).whenPressed( 
   //     new InstantCommand(

@@ -21,13 +21,12 @@ public final class Constants {
 	public static int motor_fl = 2;
 	public static int motor_br = 4;
 	public static int motor_bl = 1;
+	public static int climber = 9;
 
 	public static int fly1 = 5;
-	//public static int fly2 = 6;
+	public static int conveyerLeft = 6;
 
 	public static int PEsensor = 7;
-	public static int conveyerLeft = 8;
-	public static int conveyerRight = 9;
 
 	public static int shooterWheel = 0;
 
